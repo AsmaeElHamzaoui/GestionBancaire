@@ -114,7 +114,7 @@ public class BanqueController {
                     System.out.println("Mise à jour des intérêts interrompue.");
                 }
             });
-            t.setDaemon(true); // le thread s'arrête quand ton programme s'arrête
+            t.setDaemon(true); // le thread s'arrête quand le programme s'arrête
             t.start();
 
         }
