@@ -1,6 +1,6 @@
 package com.Models;
 
-class CompteCourant extends Compte {
+public class CompteCourant extends Compte {
 
     private double decouvert;
 
@@ -20,8 +20,8 @@ class CompteCourant extends Compte {
     @Override
     public boolean retirer(float montant) {
         if (montant <= 0) return false;
-        if (solde - montant < -decouvert) return false; //pourqoui (-decouvert)
-        solde -= montant;
+        if (getSolde() - montant < -decouvert) return false; //pourqoui (-decouvert)
+        setSolde(getSolde() -montant);
         return true;
     }
 
@@ -32,8 +32,8 @@ class CompteCourant extends Compte {
 
     @Override
     public void afficherDetails() {
-        System.out.println("Code du compte courant " +code);
-        System.out.println("Solde" +solde);
+        System.out.println("Code du compte courant " +getCode());
+        System.out.println("Solde" +getSolde());
         System.out.println("Découvert autorisé est :" +decouvert);
 
     }

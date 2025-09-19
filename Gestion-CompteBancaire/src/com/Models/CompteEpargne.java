@@ -3,32 +3,38 @@ package com.Models;
 public class CompteEpargne extends Compte {
     private double tauxInteret;
 
-   public CompteEpargne(String code, float solde,double tauxInteret){
-       super(code,solde);
-       this.tauxInteret=tauxInteret;
-   }
-
-    public double getTauxInteret(){
-       return tauxInteret;
-    }
-    public void setTauxInteret(double tauxInteret){
-       this.tauxInteret=tauxInteret;
+    public CompteEpargne(String code, float solde, double tauxInteret) {
+        super(code, solde);
+        this.tauxInteret = tauxInteret;
     }
 
-    @Override
-    public  boolean retirer(float montant){
-       return true;
+    public double getTauxInteret() {
+        return tauxInteret;
+    }
+
+    public void setTauxInteret(double tauxInteret) {
+        this.tauxInteret = tauxInteret;
     }
 
     @Override
-    public  double calculerInteret(){
-          return  solde * tauxInteret;
+    public boolean retirer(float montant) {
+
+        if (montant > 0 && getSolde() >= montant) {
+            setSolde(getSolde() - montant);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void afficherDetails(){
-        System.out.println("Code du Compte Epargne: " + code);
-        System.out.println("Solde: " + solde);
+    public double calculerInteret() {
+        return getSolde() * tauxInteret;
+    }
+
+    @Override
+    public void afficherDetails() {
+        System.out.println("Code du Compte Epargne: " + getCode());
+        System.out.println("Solde: " + getSolde());
         System.out.println("Taux d'intérêt: " + tauxInteret);
     }
 }

@@ -16,7 +16,7 @@ public class Retrait extends Operation {
         this.destination=destination;
     }
 
-    public  String récupérerType(){
+    public  String recupererType(){
         return "Retrait ("+destination+")";
     };
 }

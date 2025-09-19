@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public abstract class Operation {
-    protected String numero;
-    protected LocalDate date ;
-    protected float montant;
+    private String numero;
+    private LocalDate date ;
+    private float montant;
 
     public Operation(float montant){
         this.numero=UUID.randomUUID().toString();
@@ -33,11 +33,11 @@ public abstract class Operation {
         this.montant=montant;
     }
 
-    public abstract String récupérerType();
+    public abstract String recupererType();
 
     @Override
     public String toString(){
-        return String.format("[%s]%s-%.2fDH-%s",date,numero,montant,récupérerType());
+        return String.format("[%s]%s-%.2fDH-%s",date,numero,montant,recupererType());
     }
 
 }
