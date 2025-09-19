@@ -97,11 +97,26 @@ public class BanqueController {
             }
             System.out.print("Solde initial");
             float solde = Utils.lireFloat(sc.nextLine().trim());
-            //à ajouter le taux d'intéret doit etre ajouter pour chaque 5secondes
             System.out.print("Taux intéret:");
             double taux = Utils.lireFloat(sc.nextLine().trim());
-            comptes.put(code, new CompteEpargne(code, solde, taux));
+            CompteEpargne compte = new CompteEpargne(code, solde, taux);
+            comptes.put(code, compte);
             System.out.println("Compte épargne créé");
+            Thread t = new Thread(() -> {
+                try {
+                    while (true) {
+                        Thread.sleep(5000); // attend 5 secondes
+                        double interet = compte.getSolde() * (taux / 100);
+                        compte.setSolde((float) (compte.getSolde() + interet));
+                        System.out.println("Intérêt ajouté : " + interet + ", Nouveau solde : " + compte.getSolde());
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("Mise à jour des intérêts interrompue.");
+                }
+            });
+            t.setDaemon(true); // le thread s'arrête quand ton programme s'arrête
+            t.start();
+
         }
 
         // le lancement d'une exception dans le cas ou l'utilisatuer saisi une autre chose qu'un nombre .
